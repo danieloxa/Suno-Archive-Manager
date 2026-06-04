@@ -8,6 +8,13 @@ Download your entire Suno music library as a local ZIP. No cloud accounts, no co
 2. Indexes every song as it loads (live counter in the popup)
 3. Exports everything as a ZIP: audio files (MP3/M4A), cover art, and `metadata.json`
 
+## Install
+
+1. Download the correct .Zip
+   - Chrome: https://github.com/danieloxa/Suno-Archive-Manager/raw/refs/heads/main/dist/archive-master-chrome.zip
+   - Firefox: https://github.com/danieloxa/Suno-Archive-Manager/raw/refs/heads/main/dist/archive-master-firefox.zip
+2. Install/load into Browser (See instructions below for loading).
+
 ## Build
 
 ```bash
