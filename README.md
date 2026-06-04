@@ -4,7 +4,7 @@ Download your entire Suno music library as a local ZIP. No cloud accounts, no co
 
 ## What it does
 
-1. Auto-scrolls your Suno library page, intercepting API responses
+1. Auto-captures your Suno library page as your scroll, intercepting API responses
 2. Indexes every song as it loads (live counter in the popup)
 3. Exports everything as a ZIP: audio files (MP3/M4A), cover art, and `metadata.json`
 
