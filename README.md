@@ -32,6 +32,8 @@ npm run package:firefox  # → dist/archive-master-firefox.zip
 4. Click **Load unpacked**
 5. Select the `dist/chrome/` folder
 
+> Note: This is a manually installed extension. Permanent installation will be available if demand warrants an official release via the Chrome Extension Store).
+
 ## Load in Firefox (temporary)
 
 1. Run `npm run build:firefox`
@@ -39,7 +41,7 @@ npm run package:firefox  # → dist/archive-master-firefox.zip
 3. Click **Load Temporary Add-on…**
 4. Select `dist/firefox/manifest.json`
 
-> Note: Temporary add-ons are removed on browser restart. For permanent installation, sign the extension via [AMO](https://addons.mozilla.org/developers/).
+> Note: Temporary add-ons are removed on browser restart. Permanent installation will be available if demand warrants an official release via Mozilla Firefox Addon's Library).
 
 ## Usage
 
@@ -63,7 +65,7 @@ SunoArchive_YYYY-MM-DD/
 ## Known limitations
 
 - **CDN URL expiry**: Suno CDN URLs expire after some time. Export promptly after scanning; don't save the JSON and come back days later.
-- **Large libraries**: 500+ songs may take several minutes to assemble the ZIP. The progress bar shows per-file progress.
+- **Large libraries**: 500+ songs may take several minutes to assemble the ZIP. The progress bar shows per-file progress. This is being downloaded, and archived locally and is dependant on network performance, computer specifications and library size.
 - **SPA navigation**: If you navigate away and back during a scan, the extension re-attaches automatically, but a page hard-refresh resets the content script state (the background still holds already-captured songs).
 - **Firefox temporary installs**: Removed on browser restart — use `about:debugging` each session, or sign via AMO.
 - **M4A on older Android**: Some Suno tracks are delivered as `.m4a`. The extension always detects the extension from the URL rather than hardcoding `.mp3`.
