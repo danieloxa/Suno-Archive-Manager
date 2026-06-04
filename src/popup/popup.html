@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SAM</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+
+  <!-- ── OFF SITE ─────────────────────────────────────────────────────────── -->
+  <div id="view-offsite" class="view hidden">
+    <div class="logo-area">
+      <div class="logo-icon">♪</div>
+      <h1 class="app-title">SAM</h1>
+      <p class="app-sub">Your Suno library, downloaded locally.</p>
+    </div>
+    <button id="btn-open-suno" class="btn-primary">Open Suno Library</button>
+    <p class="hint-text center" style="margin-top:10px;">Navigate to suno.com to begin.</p>
+  </div>
+
+  <!-- ── READY ─────────────────────────────────────────────────────────────── -->
+  <div id="view-ready" class="view hidden">
+    <div class="logo-area compact">
+      <div class="logo-icon small">♪</div>
+      <h1 class="app-title small">SAM</h1>
+    </div>
+    <p class="hint-text center">Scans your library at <strong>suno.com/me</strong> or any <strong>suno.com/playlist/</strong> page. Navigate there first, or click below to go to your library.</p>
+    <button id="btn-start-scan" class="btn-primary">Scan Library</button>
+    <div id="ready-resume" class="resume-area hidden">
+      <p class="hint-text center">Previous scan: <strong id="resume-count">0</strong> songs indexed.</p>
+      <button id="btn-resume-export" class="btn-secondary">Download ZIP from Previous Scan</button>
+      <button id="btn-clear-scan" class="btn-ghost">Clear &amp; Start Fresh</button>
+    </div>
+  </div>
+
+  <!-- ── SCANNING ──────────────────────────────────────────────────────────── -->
+  <div id="view-scanning" class="view hidden">
+    <div class="scan-header">
+      <div class="pulse-dot"></div>
+      <span class="scan-label" id="scan-label">Scrolling…</span>
+    </div>
+    <div class="count-display">
+      <span id="scan-count">0</span>
+      <span class="count-label">songs found</span>
+    </div>
+    <div id="scan-log" class="log-console"></div>
+    <div class="scan-actions">
+      <button id="btn-pause" class="btn-secondary half">Pause</button>
+      <button id="btn-stop-export" class="btn-primary half">Stop &amp; Export</button>
+    </div>
+  </div>
+
+  <!-- ── DONE ──────────────────────────────────────────────────────────────── -->
+  <div id="view-done" class="view hidden">
+    <div class="done-header">
+      <div class="done-icon">✓</div>
+      <div>
+        <p class="done-count-label">Songs ready to export</p>
+        <div class="count-display small">
+          <span id="done-count">0</span>
+        </div>
+        <p id="done-date-range" class="date-range"></p>
+      </div>
+    </div>
+
+    <div id="zip-progress-area" class="hidden">
+      <div class="progress-track">
+        <div id="zip-progress-bar" class="progress-bar"></div>
+      </div>
+      <p id="zip-status-text" class="status-text">Preparing…</p>
+    </div>
+
+    <button id="btn-download-zip" class="btn-primary full">Download ZIP</button>
+    <button id="btn-scan-again" class="btn-ghost">Scan Again</button>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
