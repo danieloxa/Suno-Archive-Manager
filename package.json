@@ -1,0 +1,18 @@
+{
+  "name": "archive-master-extension",
+  "version": "1.0.0",
+  "description": "Browser extension to scan and download your Suno music library",
+  "scripts": {
+    "build:chrome": "node build.js chrome",
+    "build:firefox": "node build.js firefox",
+    "build:all": "node build.js all",
+    "package:chrome": "node build.js chrome && npx bestzip dist/archive-master-chrome.zip dist/chrome/",
+    "package:firefox": "node build.js firefox && npx bestzip dist/archive-master-firefox.zip dist/firefox/",
+    "package:all": "node build.js all && npx bestzip dist/archive-master-chrome.zip dist/chrome/ && npx bestzip dist/archive-master-firefox.zip dist/firefox/"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "browser-id3-writer": "^6.3.1",
+    "jszip": "^3.10.1"
+  }
+}
