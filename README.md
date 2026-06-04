@@ -1,4 +1,4 @@
-# Archive Master — Browser Extension
+# SAM - Suno Archive Manager — Browser Extension
 
 Download your entire Suno music library as a local ZIP. No cloud accounts, no console scripts, no external servers.
 
