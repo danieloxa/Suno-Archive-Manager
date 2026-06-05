@@ -8,6 +8,18 @@ let pollInterval = null;
 let scrollCompleteTimer = null;
 let waitingForLibraryLoad = false;
 
+function isAllowedScanPage(url) {
+  return /suno\.com\/(me|library|playlist\/)/i.test(url);
+}
+
+function isPlaylistPage(url) {
+  return /suno\.com\/playlist\//i.test(url);
+}
+
+function isLibraryPage(url) {
+  return /suno\.com\/(me|library)/i.test(url);
+}
+
 const views = {
   offsite:  document.getElementById('view-offsite'),
   ready:    document.getElementById('view-ready'),
@@ -91,24 +103,31 @@ async function startScan() {
   await msgBg({ type: 'CLEAR_SONGS' });
   el.scanLog.innerHTML = '';
   el.scanCount.textContent = '0';
-  el.scanLabel.textContent = 'Loading library…';
+  el.scanLabel.textContent = 'Loading…';
   isPaused = false;
   el.btnPause.textContent = 'Pause';
   showView('scanning');
-  appendLog('Navigating to library…');
 
+  // Always do a fresh navigation so document_start fires and the fetch
+  // interceptor catches every API call from the very first request.
+  // For playlist pages we reload the same URL; otherwise go to /me.
+  const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+  const targetUrl = isPlaylistPage(tab?.url)  ? tab.url
+                  : isLibraryPage(tab?.url)   ? tab.url
+                  : 'https://suno.com/me';
+
+  appendLog('Loading page…');
   waitingForLibraryLoad = true;
   if (activeTabId) {
-    chrome.tabs.update(activeTabId, { url: 'https://suno.com/me' });
+    chrome.tabs.update(activeTabId, { url: targetUrl });
   } else {
-    const tab = await chrome.tabs.create({ url: 'https://suno.com/me' });
-    activeTabId = tab.id;
+    const newTab = await chrome.tabs.create({ url: targetUrl });
+    activeTabId = newTab.id;
   }
 }
 
 async function beginScroll() {
-  appendLog('Page loaded — starting auto-scroll', 'success');
-  el.scanLabel.textContent = 'Scrolling…';
+  appendLog('Starting auto-scroll…', 'success');
   await msgContent({ type: 'START_SCROLL' });
   startPolling();
 }
@@ -187,7 +206,7 @@ chrome.runtime.onMessage.addListener((msg) => {
 chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
   if (tabId !== activeTabId || changeInfo.status !== 'complete') return;
 
-  if (waitingForLibraryLoad && tab.url?.includes('/me')) {
+  if (waitingForLibraryLoad && isAllowedScanPage(tab.url)) {
     waitingForLibraryLoad = false;
     beginScroll();
     return;
